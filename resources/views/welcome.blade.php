@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Websockets & Laravel Echo
+                    Websockets
                 </div>
 
                 <p class="lead">
