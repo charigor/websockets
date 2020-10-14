@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Bugsnag;
-use RuntimeExeption;
+use RuntimeException;
 class HomeController extends Controller
 {
         /**
@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        Bugsnag::notifyException(new RuntimeExeption('sdfsdf'));
+        Bugsnag::notifyException(new RuntimeException('sdfsdf'));
         return view('home');
     }
 }

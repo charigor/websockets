@@ -16,11 +16,11 @@ class CommentController extends Controller
     public function index(Post $post)
     {
 
-        $comments = $posts->comments()
+        $comments = $post->comments()
         ->with('user')
         ->latest()
         ->get();
-        return response()->json($comm);
+        return response()->json($comments);
     }
 
     public function save(Request $request, Post $post)
