@@ -37889,8 +37889,6 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -37919,16 +37917,18 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
-window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"](_defineProperty({
+window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: "ABSDEFG",
   cluster: "mt1",
   wsHost: window.location.hostname,
   wsPort: 6001,
-  forceTLS: false,
-  disableStats: false,
-  enabledTransports: ['ws', 'wss']
-}, "disableStats", true));
+  forceTLS: false // disableStats: false,
+  // enabledTransports: ['ws', 'wss'],
+  // disableStats: true,
+  // enabledTransports: ['ws', 'wss']
+
+});
 
 /***/ }),
 

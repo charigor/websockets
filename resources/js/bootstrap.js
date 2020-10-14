@@ -39,8 +39,8 @@ window.Echo = new Echo({
     wsHost: window.location.hostname,
     wsPort: 6001,
     forceTLS: false,
-    disableStats: false,
-    enabledTransports: ['ws', 'wss'],
-    disableStats: true,
+    // disableStats: false,
+    // enabledTransports: ['ws', 'wss'],
+    // disableStats: true,
     // enabledTransports: ['ws', 'wss']
 });

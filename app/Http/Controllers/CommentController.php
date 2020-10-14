@@ -9,6 +9,7 @@ use Auth;
 use App\Events\NewComment;
 use Debugbar;
 use Log;
+use Bugsnag;
 
 class CommentController extends Controller
 {
@@ -25,16 +26,20 @@ class CommentController extends Controller
 
     public function save(Request $request, Post $post)
     {
-        $comment = $post->comments()->create([
-            'body'    => $request->body,
-            'user_id' => Auth::id(),
-        ]);
+        $comment = null;
+        if($request->body){
+            $comment = $post->comments()->create([
+                'body'    => $request->body,
+                'user_id' => Auth::id(),
+            ]);
+
         $comment = Comment::where('id',$comment->id)
                           ->with('user')
                           ->first();
-
-        broadcast(new NewComment($comment))->toOthers();
-
-        return $comment->toJson();
+        }
+        if($comment){
+            broadcast(new NewComment($comment))->toOthers();
+        }
+        return $comment ? $comment->toJson() : '';
     }
 }

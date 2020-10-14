@@ -67,7 +67,7 @@
         })
         .then((response)=>{
           this.commentBox = '';
-          this.comments.unshift(response.data);
+        //   this.comments.unshift(response.data);
         })
         .catch(function(error){
           console.log(error);

@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        Bugsnag::notifyException(new RuntimeException('sdfsdf'));
         return view('home');
+        $a = 20/0;
     }
 }
