@@ -8,17 +8,19 @@ use App\Models\Post;
 use Auth;
 use App\Events\NewComment;
 use Debugbar;
+use Log;
 
 class CommentController extends Controller
 {
     //
     public function index(Post $post)
     {
-        return response()->json($post->comments()
-                                     ->with('user')
-                                     ->latest()
-                                     ->get()
-                                    );
+
+        $comments = $posts->comments()
+        ->with('user')
+        ->latest()
+        ->get();
+        return response()->json($comm);
     }
 
     public function save(Request $request, Post $post)

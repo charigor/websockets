@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container">
+  <div class="container" id="comments">
     <h1>{{ $post->title }}</h1>
     {{ $post->updated_at->toFormattedDateString() }}
     @if ($post->published)
@@ -14,7 +14,6 @@
       {{ $post->content }}
     </p>
     <hr />
-
     <h3>Comments:</h3>
     <div style="margin-bottom:50px;" v-if="user">
       <textarea v-model="commentBox" class="form-control" rows="3" name="body" placeholder="Leave a comment"></textarea>
@@ -24,8 +23,7 @@
       You must be logged in!
     </div>
 
-
-    <div class="media" style="margin-top:20px;" v-for="comment in comments">
+    <div class="media" style="margin-top:20px;" :key="comment.id" v-for="comment in comments">
       <div class="media-left">
         <a href="#">
           <img class="media-object" src="http://placeimg.com/80/80" alt="...">
@@ -41,22 +39,22 @@
     </div>
   </div>
 @endsection
-
 @section('scripts')
 <script>
-  const app = new Vue({
-    el: '#app',
-    data: {
-      comments: {},
+   const app = new Vue({
+    el: '#comments',
+    data:{
+      comments: [],
       commentBox: '',
       post: {!! $post->toJson() !!},
       user: {!! Auth::check() ? Auth::user()->toJson() : 'null' !!}
     },
     methods: {
       getComments(){
+        let v = this
         axios.get(`/api/posts/${this.post.id}/comments`)
         .then((response)=>{
-          this.comments = response.data
+          v.comments = response.data
         })
         .catch(function(error){
           console.log(error);
@@ -69,7 +67,6 @@
         })
         .then((response)=>{
           this.commentBox = '';
-          console.log(response);
           this.comments.unshift(response.data);
         })
         .catch(function(error){
@@ -86,6 +83,7 @@
     mounted() {
       this.getComments();
       this.listen();
+
     },
 
   });
