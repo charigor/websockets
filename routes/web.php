@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SettingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +15,11 @@ use App\Http\Controllers\PostController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function(){
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
+    Route::post('/setting/store', [SettingController::class, 'store'])->name('setting.store');
+});
 Route::get('/', function(){
     return view('welcome');
 });
